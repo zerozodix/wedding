@@ -33,18 +33,38 @@ class App extends Component {
   }
 
   onLoginClick(e) {
-    console.log("test");
-    const email = this.state.email;
-    const password = this.state.password;
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(function (e) {
-        console.log("login success");
-      })
-      .catch(function (error) {
-        // Handle Errors here.
-        console.log(error);
-        // ...
-      });
+    // const email = this.state.email;
+    // const password = this.state.password;
+    // firebase.auth().signInWithEmailAndPassword(email, password)
+    //   .then(function (e) {
+    //     console.log("login success");
+    //   })
+    //   .catch(function (error) {
+    //     // Handle Errors here.
+    //     console.log(error);
+    //     // ...
+    //   });
+    var provider = new firebase.auth.FacebookAuthProvider();
+    provider.addScope('user_birthday');
+    firebase.auth().languageCode = 'en_US';
+    provider.setCustomParameters({
+      'display': 'popup'
+    });
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+      var token = result.credential.accessToken;
+      var user = result.user;
+      // ...
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+    });
+
   }
 
   render() {
