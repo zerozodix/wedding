@@ -7,7 +7,7 @@ import Authentication from './components/authentication/Authentication';
 class App extends Component {
   constructor(props) {
     super(props);
-    var config = {
+    const config = {
       apiKey: "AIzaSyDbB0zL8PTvqb7eLTqDTltSyNKFvUDhQ_Q",
       authDomain: "the-weding-a-ken.firebaseapp.com",
       databaseURL: "https://the-weding-a-ken.firebaseio.com",
@@ -16,10 +16,6 @@ class App extends Component {
       messagingSenderId: "338413489020"
     };
     firebase.initializeApp(config);
-    this.state = {
-      email: '',
-      password: ''
-    };
   }
 
   render() {
