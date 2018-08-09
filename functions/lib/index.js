@@ -11,30 +11,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const admin = require("firebase-admin");
 const functions = require("firebase-functions");
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+const BaseRepository_1 = require("./repository/BaseRepository");
 admin.initializeApp(functions.config().firebase);
+function getBooks(uid) {
+    const postDocument = new BaseRepository_1.default('posts/${uid}');
+    postDocument.AddDocument({ test: 'test' }).then(() => {
+        // Document created successfully.
+    });
+}
 const app = express();
 app.disable("x-powered-by");
 app.get("/users/:uid", function getUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        // Guess what, uid will NEVER be null in this context because of the Express router.
         const uid = req.params.uid;
-        res.status(200).send(`You requested user with UID = ${uid}`);
+        res.status(200).send(getBooks(uid));
     });
 });
 app.post("/users", function createUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        // Guess what, uid will NEVER be null in this context because of the Express router.
         const uid = req.params.uid;
         res.status(200).send(`You requested user with UID = ${uid}`);
     });
 });
-// This line is important. What we are doing here is exporting ONE function with the name
-// `api` which will always route
 exports.api = functions.region('asia-northeast1').https.onRequest(app);
 //# sourceMappingURL=index.js.map
