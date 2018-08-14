@@ -6,9 +6,15 @@ import BaseRepository from './repository/BaseRepository';
 admin.initializeApp(functions.config().firebase);
 
 function getBooks(uid: string) {
-    const postDocument = new BaseRepository('posts/${uid}');
-    postDocument.AddDocument({ test: 'test' }).then(() => {
-        // Document created successfully.
+    const postDocument = new BaseRepository('test');
+    postDocument.AddDocument({ foo: uid }).then(documentReference => {
+        console.log(`Root location for document is ${documentReference.id}`);
+        console.log(`------------------------`);
+        let bar = postDocument.GetDocument(documentReference.id);
+        bar.then(item => {
+            console.log(`foo ${item.foo}`)
+        });
+
     });
 }
 

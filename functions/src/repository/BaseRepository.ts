@@ -1,14 +1,17 @@
 import * as functions from 'firebase-functions';
 
 class BaseRepository {
-    private documentRepository;
-    constructor(document: string) {
+    private collectionRepository;
+    constructor(collection: string) {
         const Firestore = require('@google-cloud/firestore');
         const firestore = new Firestore(functions.config().firebase);
-        this.documentRepository = firestore.doc(document);
+        this.collectionRepository = firestore.collection(collection);
     }
     public AddDocument(document: object) {
-        return this.documentRepository.set(document);
+        return this.collectionRepository.add(document);
+    }
+    public GetDocument(documentId: string) {
+        return this.collectionRepository.doc(documentId).get()
     }
 }
 export default BaseRepository;

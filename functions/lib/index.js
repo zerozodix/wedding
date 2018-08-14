@@ -14,9 +14,14 @@ const functions = require("firebase-functions");
 const BaseRepository_1 = require("./repository/BaseRepository");
 admin.initializeApp(functions.config().firebase);
 function getBooks(uid) {
-    const postDocument = new BaseRepository_1.default('posts/${uid}');
-    postDocument.AddDocument({ test: 'test' }).then(() => {
-        // Document created successfully.
+    const postDocument = new BaseRepository_1.default('test');
+    postDocument.AddDocument({ foo: uid }).then(documentReference => {
+        console.log(`Root location for document is ${documentReference.id}`);
+        console.log(`------------------------`);
+        let bar = postDocument.GetDocument(documentReference.id);
+        bar.then(item => {
+            console.log(`foo ${item.foo}`);
+        });
     });
 }
 const app = express();
