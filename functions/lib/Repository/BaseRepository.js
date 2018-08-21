@@ -9,10 +9,18 @@ class BaseRepository {
     }
     AddDocument(document) {
         return this.collectionRepository.add(document);
-        // return this.collectionRepository.set(document);
     }
     GetDocument(documentId) {
         return this.collectionRepository.doc(documentId).get();
+    }
+    GetDocuments() {
+        return this.collectionRepository.get();
+    }
+    DeleteDocument(documentId) {
+        return this.collectionRepository.doc(documentId).delete();
+    }
+    UpdateDocument(documentId, document) {
+        return this.collectionRepository.doc(documentId).set(document);
     }
 }
 exports.default = BaseRepository;
