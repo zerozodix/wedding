@@ -15,12 +15,12 @@ const BaseRepository_1 = require("./repository/BaseRepository");
 admin.initializeApp(functions.config().firebase);
 function getBooks(uid) {
     const postDocument = new BaseRepository_1.default('test');
-    postDocument.AddDocument({ foo: uid }).then(documentReference => {
+    return postDocument.AddDocument({ foo: uid }).then(documentReference => {
         console.log(`Root location for document is ${documentReference.id}`);
         console.log(`------------------------`);
-        let bar = postDocument.GetDocument(documentReference.id);
-        bar.then(item => {
-            console.log(`foo ${item.foo}`);
+        const bar = postDocument.GetDocument(documentReference.id);
+        return bar.then(item => {
+            return item.data();
         });
     });
 }
@@ -29,7 +29,9 @@ app.disable("x-powered-by");
 app.get("/users/:uid", function getUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const uid = req.params.uid;
-        res.status(200).send(getBooks(uid));
+        getBooks(uid).then(item => {
+            res.status(200).send(item);
+        });
     });
 });
 app.post("/users", function createUser(req, res) {
