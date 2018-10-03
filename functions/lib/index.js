@@ -11,33 +11,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const admin = require("firebase-admin");
 const functions = require("firebase-functions");
-const BaseRepository_1 = require("./repository/BaseRepository");
+const Question_1 = require("./business/Question");
 admin.initializeApp(functions.config().firebase);
-function getBooks(uid) {
-    const postDocument = new BaseRepository_1.default('test');
-    return postDocument.AddDocument({ foo: uid }).then(documentReference => {
-        console.log(`Root location for document is ${documentReference.id}`);
-        console.log(`------------------------`);
-        const bar = postDocument.GetDocument(documentReference.id);
-        return bar.then(item => {
-            return item.data();
-        });
-    });
-}
 const app = express();
 app.disable("x-powered-by");
-app.get("/users/:uid", function getUser(req, res) {
+app.post("/questions/create", function createUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const uid = req.params.uid;
-        getBooks(uid).then(item => {
-            res.status(200).send(item);
+        const questionService = new Question_1.default();
+        questionService.Create(req.body.question, req.body.firstChoice, req.body.secondChoice).then(resQuestion => {
+            res.status(200).send();
         });
-    });
-});
-app.post("/users", function createUser(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const uid = req.params.uid;
-        res.status(200).send(`You requested user with UID = ${uid}`);
     });
 });
 exports.api = functions.region('asia-northeast1').https.onRequest(app);

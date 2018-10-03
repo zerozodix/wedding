@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const BaseRepository_1 = require("../repository/BaseRepository");
-class Question {
+class QuestionService {
     constructor() {
         this.questionRepo = new BaseRepository_1.default('questions');
     }
@@ -10,6 +10,9 @@ class Question {
             return questions;
         });
     }
+    Create(question, firstChoice, secondChoice) {
+        return this.questionRepo.AddDocument({ question: question });
+    }
 }
-exports.default = Question;
+exports.default = QuestionService;
 //# sourceMappingURL=Question.js.map

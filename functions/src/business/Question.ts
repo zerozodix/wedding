@@ -1,6 +1,6 @@
 import BaseRepository from '../repository/BaseRepository';
 
-class Question {
+class QuestionService {
     private questionRepo = new BaseRepository('questions');
 
     public GetAllQuestions() {
@@ -8,5 +8,9 @@ class Question {
             return questions;
         });
     }
+
+    public Create(question: string, firstChoice: string, secondChoice: string) {
+        return this.questionRepo.AddDocument({ question: question });
+    }
 }
-export default Question;
+export default QuestionService;
