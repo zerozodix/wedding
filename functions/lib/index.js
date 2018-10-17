@@ -11,15 +11,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const admin = require("firebase-admin");
 const functions = require("firebase-functions");
-const Question_1 = require("./business/Question");
+const QuestionServices_1 = require("./service/QuestionServices");
 admin.initializeApp(functions.config().firebase);
 const app = express();
 app.disable("x-powered-by");
 app.post("/questions/create", function createUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const questionService = new Question_1.default();
-        questionService.Create(req.body.question, req.body.firstChoice, req.body.secondChoice).then(resQuestion => {
+        const questionService = new QuestionServices_1.default();
+        questionService.Create(req.body.question, req.body.answers).then(resQuestion => {
             res.status(200).send();
+        });
+    });
+});
+app.get("/questions/all", function createUser(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const questionService = new QuestionServices_1.default();
+        questionService.GetAllQuestions().then(resQuestion => {
+            res.status(200).send(resQuestion);
         });
     });
 });

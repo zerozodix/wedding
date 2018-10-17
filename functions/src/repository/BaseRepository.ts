@@ -1,11 +1,13 @@
 import * as functions from 'firebase-functions';
 
 class BaseRepository {
-    private collectionRepository;
+    protected collectionRepository;
 
     constructor(collection: string) {
         const Firestore = require('@google-cloud/firestore');
+        const settings = { timestampsInSnapshots: true };
         const firestore = new Firestore(functions.config().firebase);
+        firestore.settings(settings);
         this.collectionRepository = firestore.collection(collection);
     }
 
