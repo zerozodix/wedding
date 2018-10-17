@@ -4,7 +4,9 @@ const functions = require("firebase-functions");
 class BaseRepository {
     constructor(collection) {
         const Firestore = require('@google-cloud/firestore');
+        const settings = { timestampsInSnapshots: true };
         const firestore = new Firestore(functions.config().firebase);
+        firestore.settings(settings);
         this.collectionRepository = firestore.collection(collection);
     }
     AddDocument(document) {
