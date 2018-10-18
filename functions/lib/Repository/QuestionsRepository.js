@@ -18,7 +18,6 @@ class QuestionsRepository extends BaseRepository_1.default {
         const me = this.collectionRepository.doc(question.Question);
         const collectionFirstAnswer = "firstAnswer";
         const collectionSecondAnswer = "secondAnswer";
-        console.log(question.Answers);
         const answerModels = question.Answers.map(answer => {
             return {
                 "answer": answer.Answer || null,
@@ -26,7 +25,7 @@ class QuestionsRepository extends BaseRepository_1.default {
             };
         });
         console.log(answerModels);
-        return me.set({ title: question.Question, answers: answerModels });
+        return me.set({ title: question.Question, type: question.Type, answers: answerModels });
         //Set new Collection When Has Answer
         // .then(() => {
         //     me.collection(collectionFirstAnswer).doc("").set({});

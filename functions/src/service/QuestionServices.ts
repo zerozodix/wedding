@@ -11,9 +11,10 @@ class QuestionService {
         });
     }
 
-    public Create(question: string, answers: any[]) {
+    public Create(question: string, type: string, answers: any[]) {
         const questionModel = new Question();
         questionModel.Question = question;
+        questionModel.Type = type;
 
         questionModel.Answers = answers.map(answer => {
             const answerModel = new Answer();

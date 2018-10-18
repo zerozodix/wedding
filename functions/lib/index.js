@@ -18,7 +18,7 @@ app.disable("x-powered-by");
 app.post("/questions/create", function createUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const questionService = new QuestionServices_1.default();
-        questionService.Create(req.body.question, req.body.answers).then(resQuestion => {
+        questionService.Create(req.body.question, req.body.type, req.body.answers).then(resQuestion => {
             res.status(200).send();
         });
     });
