@@ -14,6 +14,11 @@ class QuestionsRepository extends BaseRepository_1.default {
             return data;
         });
     }
+    GetQuestion(question) {
+        return this.GetDocument(question).then(resQuestion => {
+            return resQuestion.data();
+        });
+    }
     CreateQuestion(question) {
         const me = this.collectionRepository.doc(question.Question);
         const collectionFirstAnswer = "firstAnswer";
@@ -25,7 +30,7 @@ class QuestionsRepository extends BaseRepository_1.default {
             };
         });
         console.log(answerModels);
-        return me.set({ title: question.Question, type: question.Type, answers: answerModels });
+        return me.set({ title: question.Question, answers: answerModels });
         //Set new Collection When Has Answer
         // .then(() => {
         //     me.collection(collectionFirstAnswer).doc("").set({});

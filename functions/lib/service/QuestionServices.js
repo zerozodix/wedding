@@ -24,6 +24,11 @@ class QuestionService {
         });
         return this.questionRepo.CreateQuestion(questionModel);
     }
+    GetQuestion(quesion) {
+        return this.questionRepo.GetQuestion(quesion).then(result => {
+            return result;
+        });
+    }
 }
 exports.default = QuestionService;
 //# sourceMappingURL=QuestionServices.js.map

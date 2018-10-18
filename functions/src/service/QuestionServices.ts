@@ -25,5 +25,12 @@ class QuestionService {
 
         return this.questionRepo.CreateQuestion(questionModel);
     }
+
+    public GetQuestion(quesion: string) {
+        return this.questionRepo.GetQuestion(quesion).then(result => {
+            return result;
+        })
+
+    }
 }
 export default QuestionService;
