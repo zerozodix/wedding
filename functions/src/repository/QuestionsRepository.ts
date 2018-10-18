@@ -17,12 +17,16 @@ class QuestionsRepository extends BaseRepository {
         });
     }
 
+    public GetQuestion(question: string) {
+        return this.GetDocument(question).then(resQuestion => {
+            return resQuestion.data();
+        })
+    }
+
     public CreateQuestion(question: Question) {
         const me = this.collectionRepository.doc(question.Question);
         const collectionFirstAnswer = "firstAnswer";
         const collectionSecondAnswer = "secondAnswer";
-
-        console.log(question.Answers);
 
         const answerModels = question.Answers.map(answer => {
             return {

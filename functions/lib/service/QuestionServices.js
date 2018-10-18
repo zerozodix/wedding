@@ -12,9 +12,10 @@ class QuestionService {
             return questions;
         });
     }
-    Create(question, answers) {
+    Create(question, type, answers) {
         const questionModel = new Question_1.Question();
         questionModel.Question = question;
+        questionModel.Type = type;
         questionModel.Answers = answers.map(answer => {
             const answerModel = new Answer_1.Answer();
             answerModel.Answer = answer.answer;
@@ -22,6 +23,11 @@ class QuestionService {
             return answerModel;
         });
         return this.questionRepo.CreateQuestion(questionModel);
+    }
+    GetQuestion(quesion) {
+        return this.questionRepo.GetQuestion(quesion).then(result => {
+            return result;
+        });
     }
 }
 exports.default = QuestionService;

@@ -7,6 +7,12 @@ class Question {
     set Question(v) {
         this._Question = v;
     }
+    get Type() {
+        return this._Type;
+    }
+    set Type(v) {
+        this._Type = v;
+    }
     get Answers() {
         return this._Answers;
     }

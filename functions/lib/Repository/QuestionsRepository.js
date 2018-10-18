@@ -14,11 +14,15 @@ class QuestionsRepository extends BaseRepository_1.default {
             return data;
         });
     }
+    GetQuestion(question) {
+        return this.GetDocument(question).then(resQuestion => {
+            return resQuestion.data();
+        });
+    }
     CreateQuestion(question) {
         const me = this.collectionRepository.doc(question.Question);
         const collectionFirstAnswer = "firstAnswer";
         const collectionSecondAnswer = "secondAnswer";
-        console.log(question.Answers);
         const answerModels = question.Answers.map(answer => {
             return {
                 "answer": answer.Answer || null,

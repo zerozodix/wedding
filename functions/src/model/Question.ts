@@ -9,6 +9,13 @@ export class Question{
         this._Question = v;
     }
 
+    private _Type : string;
+    public get Type() : string {
+        return this._Type;
+    }
+    public set Type(v : string) {
+        this._Type = v;
+    }
     
     private _Answers : Answer[];
     public get Answers() : Answer[] {

@@ -14,20 +14,27 @@ const functions = require("firebase-functions");
 const QuestionServices_1 = require("./service/QuestionServices");
 admin.initializeApp(functions.config().firebase);
 const app = express();
+const questionService = new QuestionServices_1.default();
 app.disable("x-powered-by");
-app.post("/questions/create", function createUser(req, res) {
+app.post("/questions/create", function CreateQuestion(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const questionService = new QuestionServices_1.default();
-        questionService.Create(req.body.question, req.body.answers).then(resQuestion => {
+        questionService.Create(req.body.question, req.body.type, req.body.answers).then(resQuestion => {
             res.status(200).send();
         });
     });
 });
-app.get("/questions/all", function createUser(req, res) {
+app.get("/questions/all", function GetAllQuestions(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const questionService = new QuestionServices_1.default();
         questionService.GetAllQuestions().then(resQuestion => {
             res.status(200).send(resQuestion);
+        });
+    });
+});
+app.get("/questions/:question", function GetQuestion(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log("question => ", req.param('question'));
+        questionService.GetQuestion(req.param('question')).then(resQeustion => {
+            res.status(200).send(resQeustion);
         });
     });
 });
