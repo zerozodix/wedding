@@ -25,9 +25,6 @@ class QuestionsRepository extends BaseRepository {
 
     public CreateQuestion(question: Question) {
         const me = this.collectionRepository.doc(question.Question);
-        const collectionFirstAnswer = "firstAnswer";
-        const collectionSecondAnswer = "secondAnswer";
-
         const answerModels = question.Answers.map(answer => {
             return {
                 "answer": answer.Answer || null,

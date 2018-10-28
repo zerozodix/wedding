@@ -12,9 +12,11 @@ const express = require("express");
 const admin = require("firebase-admin");
 const functions = require("firebase-functions");
 const QuestionServices_1 = require("./service/QuestionServices");
+const AnswerServices_1 = require("./service/AnswerServices");
 admin.initializeApp(functions.config().firebase);
 const app = express();
 const questionService = new QuestionServices_1.default();
+const answerService = new AnswerServices_1.default();
 app.disable("x-powered-by");
 app.post("/questions/create", function CreateQuestion(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -32,9 +34,15 @@ app.get("/questions/all", function GetAllQuestions(req, res) {
 });
 app.get("/questions/:question", function GetQuestion(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("question => ", req.param('question'));
         questionService.GetQuestion(req.param('question')).then(resQeustion => {
             res.status(200).send(resQeustion);
+        });
+    });
+});
+app.post("/answers/ask", function Ask(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        answerService.AnswerQuestions(req.body.question, "userId", req.body.answer).then(resAnswer => {
+            res.status(200).send(resAnswer);
         });
     });
 });
