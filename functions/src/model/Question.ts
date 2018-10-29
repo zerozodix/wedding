@@ -1,27 +1,27 @@
 import { Answer } from "./Answer";
 
 export class Question{
-    private _Question : string;
+    private question : string;
     public get Question() : string {
-        return this._Question;
+        return this.question;
     }
     public set Question(v : string) {
-        this._Question = v;
+        this.question = v;
     }
 
-    private _Type : string;
+    private type : string;
     public get Type() : string {
-        return this._Type;
+        return this.type;
     }
     public set Type(v : string) {
-        this._Type = v;
+        this.type = v;
     }
     
-    private _Answers : Answer[];
+    private answers : Answer[];
     public get Answers() : Answer[] {
-        return this._Answers;
+        return this.answers;
     }
     public set Answers(v : Answer[]) {
-        this._Answers = v;
+        this.answers = v;
     }
 }

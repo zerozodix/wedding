@@ -1,20 +1,19 @@
 export class Answer {
 
-    private _Answer: string;
+    private answer: string;
     public get Answer(): string {
-        return this._Answer;
+        return this.answer;
     }
     public set Answer(v: string) {
-        this._Answer = v;
+        this.answer = v;
     }
 
-
-    private _NextQuestion: string;
+    private nextQuestion: string;
     public get NextQuestion(): string {
-        return this._NextQuestion;
+        return this.nextQuestion;
     }
     public set NextQuestion(v: string) {
-        this._NextQuestion = v;
+        this.nextQuestion = v;
     }
 
 }
