@@ -2,22 +2,22 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class Question {
     get Question() {
-        return this._Question;
+        return this.question;
     }
     set Question(v) {
-        this._Question = v;
+        this.question = v;
     }
     get Type() {
-        return this._Type;
+        return this.type;
     }
     set Type(v) {
-        this._Type = v;
+        this.type = v;
     }
     get Answers() {
-        return this._Answers;
+        return this.answers;
     }
     set Answers(v) {
-        this._Answers = v;
+        this.answers = v;
     }
 }
 exports.Question = Question;

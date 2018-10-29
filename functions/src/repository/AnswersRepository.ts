@@ -8,9 +8,16 @@ class AnswersRepository extends BaseRepository {
     public SaveAnswer(questions: string, userId: string, answer: string) {
         return this.collectionRepository
             .doc(questions)
-            .collection(answer)
+            .collection("userAnswers")
             .doc(userId)
-            .set({ createDate: Date() });
+            .set({ answer: answer, createDate: Date() });
+    }
+
+    public GetUserAnswer(questions: string, userId) {
+        return this.collectionRepository
+            .doc(questions)
+            .collection("userAnswers")
+            .doc(userId).get();
     }
 }
 

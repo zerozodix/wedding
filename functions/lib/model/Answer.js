@@ -2,16 +2,16 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class Answer {
     get Answer() {
-        return this._Answer;
+        return this.answer;
     }
     set Answer(v) {
-        this._Answer = v;
+        this.answer = v;
     }
     get NextQuestion() {
-        return this._NextQuestion;
+        return this.nextQuestion;
     }
     set NextQuestion(v) {
-        this._NextQuestion = v;
+        this.nextQuestion = v;
     }
 }
 exports.Answer = Answer;

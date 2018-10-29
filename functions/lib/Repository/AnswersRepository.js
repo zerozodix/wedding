@@ -8,9 +8,15 @@ class AnswersRepository extends BaseRepository_1.default {
     SaveAnswer(questions, userId, answer) {
         return this.collectionRepository
             .doc(questions)
-            .collection(answer)
+            .collection("userAnswers")
             .doc(userId)
-            .set({ createDate: Date() });
+            .set({ answer: answer, createDate: Date() });
+    }
+    GetUserAnswer(questions, userId) {
+        return this.collectionRepository
+            .doc(questions)
+            .collection("userAnswers")
+            .doc(userId).get();
     }
 }
 exports.default = AnswersRepository;
